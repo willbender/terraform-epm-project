@@ -6,19 +6,20 @@
 4. [X] Create S3 Bucket for tf state lock.
 5. [X] Create DynamoDB table for LockID.
 6. [X] Make first test with terraform and tf state.
-7. [ ] Create architecture diagram.
+7. [X] Create architecture diagram.
 8. [ ] Create vpc and subnets via terraform.
 9. [ ] Create bastion host via terraform (Install Ansible on it).
 10. [ ] Create MySQL via terraform.
-11. [ ] Investigate if possible to make frontend via S3 Bucket.
-12. [ ] If previous task is possible then create frontend with bucket, if not create frontend with EC2 instance and Ansible.
-13. [ ] Create Backend with terraform.
-14. [ ] Configure Backend with ansible via bastion host.
-15. [ ] Configure load balancer via terraform.
-16. [ ] Configure workspaces for terraform
+11. [ ] Create a NAT instance via terraform.
+12. [ ] Investigate if possible to make frontend via S3 Bucket.
+13. [ ] If previous task is possible then create frontend with bucket, if not create frontend with EC2 instance and Ansible.
+14. [ ] Create Backend with terraform.
+15. [ ] Configure Backend with ansible via bastion host.
+16. [ ] Configure load balancer via terraform.
+17. [ ] Configure workspaces for terraform
     1.  [ ] qa
     2.  [ ] prod
-17. [ ] Investigate how to monitor the created resources in AWS without a 3 party license.
+18. [ ] Investigate how to monitor the created resources in AWS without a 3 party license.
 
 
 # Additional topics.
