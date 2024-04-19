@@ -7,7 +7,7 @@
 5. [X] Create DynamoDB table for LockID.
 6. [X] Make first test with terraform and tf state.
 7. [X] Create architecture diagram.
-8. [ ] Create vpc and subnets via terraform.
+8. [X] Create vpc and subnets via terraform.
 9. [ ] Create bastion host via terraform (Install Ansible on it).
 10. [ ] Create MySQL via terraform.
 11. [ ] Create a NAT instance via terraform.
