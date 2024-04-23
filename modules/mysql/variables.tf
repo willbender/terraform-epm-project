@@ -1,67 +1,56 @@
-variable "region" {
-  description = "The region to deploy the resources into"
-  default     = "us-east-1"
-}
-
-variable "cidr" {
-  description = "The CIDR block for the VPC"
-  default     = "10.0.0.0/16"
-}
-
 variable "environment" {
-  description = "The environment this resources are beeing deployed to"
-  default     = "qa"
+  description   = "The environment of the deployment"
+  type          = string
 }
 
-variable "public_subnets" {
-  description = "The public subnets configuration inside the vpc"
-  default = {
-        "10.0.1.0/24" = "us-east-1a"
-        "10.0.2.0/24" = "us-east-1b"
-        "10.0.3.0/24" = "us-east-1c"
-  }
+variable "vpc_id" {
+  description   = "The ID of the VPC"
+  type          = string
 }
 
-variable "private_subnets" {
-  description = "The private subnets configuration inside the vpc"
-  default = {
-        "10.0.4.0/24" = "us-east-1a"
-        "10.0.5.0/24" = "us-east-1b"
-        "10.0.6.0/24" = "us-east-1c"
-  }
+variable "subnet_ids" {
+  type          = list(string)
+  description   = "The ids of the subnets" 
 }
 
 variable "storage_type" {
+  type          = string
   description   = "Storage type for the mysql database"
   default       = "gp2"
 }
 
 variable "mysql_version" {
+  type          = string
   description   = "Mysql engine version"
   default       = "8.0.35"
 }
 
 variable "mysql_instance_class" {
+  type          = string
   description   = "Instance class to deploy the database to"
   default       = "db.t3.micro"
 }
 
 variable "mysql_db_identifier" {
+  type          = string
   description   = "Identifier name of the database"
   default       = "mydb"
 }
 
 variable "mysql_username" {
+  type          = string
   description   = "Username for the database"
   default       = "dbuser"
 }
 
 variable "mysql_password" {
+  type          = string
   description   = "Password for the database"
   default       = "dbpassword"
 }
 
 variable "allocated_storage" {
+  type          = number
   description   = "Size of the allocated storage for the database"
   default       = 10
 }
