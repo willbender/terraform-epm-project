@@ -24,3 +24,15 @@ output "vpc_private_subnets" {
 output "vpc_private_subnet_ids" {
   value = values(aws_subnet.private)[*].id
 }
+
+output "vpc_public_subnet_ids" {
+  value = values(aws_subnet.public)[*].id
+}
+
+output "vpc_cidr_block" {
+  value = aws_vpc.main.cidr_block
+}
+
+output "private_cidr_blocks" {
+  value = values(aws_subnet.private)[*].cidr_block
+}

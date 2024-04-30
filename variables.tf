@@ -65,3 +65,8 @@ variable "allocated_storage" {
   description   = "Size of the allocated storage for the database"
   default       = 10
 }
+
+variable "key_name" {
+  description   = "Name of the key par to use for the instances"
+  default       = "willBender"
+}

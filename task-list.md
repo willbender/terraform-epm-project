@@ -8,9 +8,9 @@
 6. [X] Make first test with terraform and tf state.
 7. [X] Create architecture diagram.
 8. [X] Create vpc and subnets via terraform.
-9. [ ] Create MySQL via terraform.
-10. [ ] Create bastion host via terraform (Install Ansible on it).
-11. [ ] Create a NAT instance via terraform.
+9. [X] Create MySQL via terraform.
+10. [ ] Create a NAT instance via terraform.
+11. [ ] Create bastion host via terraform (Install Ansible on it).
 12. [ ] Investigate if possible to make frontend via S3 Bucket.
 13. [ ] If previous task is possible then create frontend with bucket, if not create frontend with EC2 instance and Ansible.
 14. [ ] Create Backend with terraform.

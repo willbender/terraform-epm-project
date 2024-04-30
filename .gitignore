@@ -1,7 +1,3 @@
-.terraform/terraform.tfstate
-.terraform/providers/registry.opentofu.org/hashicorp/aws/5.45.0/linux_amd64/CHANGELOG.md
-.terraform/providers/registry.opentofu.org/hashicorp/aws/5.45.0/linux_amd64/LICENSE
-.terraform/providers/registry.opentofu.org/hashicorp/aws/5.45.0/linux_amd64/README.md
-.terraform/providers/registry.opentofu.org/hashicorp/aws/5.45.0/linux_amd64/terraform-provider-aws
-.terraform.lock.hcl
-.terraform/modules/*
+### Terraform ###
+# Local .terraform directories
+**/.terraform/*
