@@ -1,1 +1,0 @@
-{"Modules":[{"Key":"","Source":"","Dir":"."},{"Key":"key_pair","Source":"registry.opentofu.org/terraform-aws-modules/key-pair/aws","Version":"2.0.3","Dir":".terraform/modules/key_pair"},{"Key":"mysql","Source":"./modules/mysql","Dir":"modules/mysql"},{"Key":"nat","Source":"./modules/nat","Dir":"modules/nat"},{"Key":"vpc","Source":"./modules/vpc","Dir":"modules/vpc"}]}
