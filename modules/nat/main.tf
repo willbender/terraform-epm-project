@@ -71,7 +71,7 @@ resource "aws_instance" "nat_instance" {
   vpc_security_group_ids        = [aws_security_group.sg_nat_instance.id]
   associate_public_ip_address   = true
   source_dest_check             = false
-  key_name                      = var.nat_keypar
+  key_name                      = var.nat_keypair
 
   root_block_device {
     volume_size = "2"

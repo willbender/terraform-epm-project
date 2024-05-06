@@ -68,5 +68,15 @@ variable "allocated_storage" {
 
 variable "key_name" {
   description   = "Name of the key par to use for the instances"
-  default       = "willBender"
+  default       = "william"
+}
+
+variable "ami" {
+  description   = "Ami id to use with the ec2 instances"
+  default       = "ami-07caf09b362be10b8"
+}
+
+variable "instance_type" {
+  description   = "Type of instance to use for ec2"
+  default       = "t2.micro"
 }

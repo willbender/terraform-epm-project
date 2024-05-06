@@ -23,7 +23,7 @@ variable "nat_public_subnet_id" {
   type          = string
 }
 
-variable "nat_keypar" {
+variable "nat_keypair" {
   description   = "Name of the key par to use for the nat"
   type          = string
 }
