@@ -39,3 +39,20 @@ module "bastion_host" {
   bastion_public_subnet_id  = module.vpc.vpc_public_subnet_ids[1]
   bastion_keypair           = var.key_name
 }
+
+module "front_end" {
+  source                      = "./modules/front-end"
+  environment                 = var.environment
+  vpc_id                      = module.vpc.vpc_id
+  ami                         = var.ami
+  instance_type               = var.instance_type
+  front_end_public_subnet_id  = module.vpc.vpc_public_subnet_ids[2]
+  front_end_keypair           = var.key_name
+}
+
+module "dns" {
+  source              = "./modules/dns"
+  environment         = var.environment
+  domain_name         = var.domain_name
+  instance_public_ip  = module.front_end.public_ip
+}

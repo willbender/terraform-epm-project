@@ -11,14 +11,15 @@
 9. [X] Create MySQL via terraform.
 10. [X] Create a NAT instance via terraform.
 11. [X] Create bastion host via terraform (Install Ansible on it).
-12. [ ] Create Frontend with terraform.
-13. [ ] Create Backend with terraform.
-14. [ ] Configure Backend & Frontend with ansible via bastion host.
-15. [ ] Configure load balancer via terraform.
-16. [ ] Configure workspaces for terraform
+12. [X] Create Frontend with terraform.
+13. [X] Create DNS with Route 53.
+14. [ ] Create Backend with terraform.
+15. [ ] Configure Backend & Frontend with ansible via bastion host.
+16. [ ] Configure load balancer via terraform.
+17. [ ] Configure workspaces for terraform
     1.  [ ] qa
     2.  [ ] prod
-17. [ ] Investigate how to monitor the created resources in AWS without a 3 party license.
+18. [ ] Investigate how to monitor the created resources in AWS without a 3 party license.
 
 
 # Additional topics.

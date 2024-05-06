@@ -80,3 +80,8 @@ variable "instance_type" {
   description   = "Type of instance to use for ec2"
   default       = "t2.micro"
 }
+
+variable "domain_name" {
+  description   = "Domain name for the app"
+  default       = "devops.cloud.epm.final"
+}
