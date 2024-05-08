@@ -56,3 +56,13 @@ module "dns" {
   domain_name         = var.domain_name
   instance_public_ip  = module.front_end.public_ip
 }
+
+module "back-end" {
+  source        = "./modules/back-end"
+  environment   = var.environment
+  vpc_id        = module.vpc.vpc_id
+  elb_subnets   = module.vpc.vpc_private_subnet_ids
+  ami           = var.ami
+  instance_type = var.instance_type
+  key_name      = var.key_name
+}
