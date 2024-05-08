@@ -66,3 +66,9 @@ module "back-end" {
   instance_type = var.instance_type
   key_name      = var.key_name
 }
+
+resource "aws_route" "outbound-nat-route" {
+  route_table_id         = module.vpc.private_rt_id
+  destination_cidr_block = "0.0.0.0/0"
+  network_interface_id   = module.nat.nat_network_interface_id
+}

@@ -36,3 +36,7 @@ output "vpc_cidr_block" {
 output "private_cidr_blocks" {
   value = values(aws_subnet.private)[*].cidr_block
 }
+
+output "private_rt_id" {
+  value = aws_route_table.private_rt.id
+}
