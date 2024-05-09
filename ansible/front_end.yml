@@ -1,0 +1,56 @@
+---
+ - hosts: _frontend
+   tasks:
+
+   - name: Install dependencies
+     become: true
+     yum: name={{ item }} state=present
+     with_items:
+       - git-all
+
+   - name: Clone a github repository
+     ansible.builtin.git:
+       repo: https://github.com/willbender/devops-rampup.git
+       dest: /home/ec2-user/app/
+       clone: yes
+       update: yes
+
+   - name: Download nvm installer
+     get_url: url="https://raw.githubusercontent.com/creationix/nvm/v0.39.7/install.sh" dest=~/nvm-installer.sh mode=u=rwx,g=r,o=x
+     tags: install-nvm
+
+   - name: Execute the nvm-installer.sh
+     command: ~/nvm-installer.sh
+     args:
+       creates: ~/.nvm/nvm.sh
+     tags: install-nvm
+
+   - name: Own the nvm script
+     file:
+       path: ~/.nvm/nvm.sh
+       state: touch
+       mode: u=rwx,g=r,o=rwx
+     tags: install-nvm
+
+   - name: Activate nvm
+     command: /bin/bash ~/.nvm/nvm.sh
+     args:
+       chdir: "~/"
+     tags: install-nvm
+
+   - name: Install node
+     shell: |
+       source ~/.bashrc
+       nvm install "v20.9.0"
+       nvm use --delete-prefix "v20.9.0" --silent
+     tags: install-node
+
+   - name: Install npm dependencies
+     command: chdir=/home/ec2-user/app/movie-analyst-ui npm install
+
+   - name: Run app
+     command: chdir=/home/ec2-user/app/movie-analyst-ui node server.js &
+     async: 1000
+     poll: 0
+
+  
