@@ -1,5 +1,5 @@
 ---
- - hosts: _frontend
+ - hosts: _backend
    tasks:
 
    - name: Install dependencies
@@ -46,9 +46,9 @@
      tags: install-node
 
    - name: Install npm dependencies
-     command: chdir=/home/ec2-user/app/movie-analyst-ui npm install
+     command: chdir=/home/ec2-user/app/movie-analyst-api npm install
 
    - name: Run app
-     command: chdir=/home/ec2-user/app/movie-analyst-ui node server.js &
+     command: chdir=/home/ec2-user/app/movie-analyst-api node server.js &
      async: 1000
      poll: 0
