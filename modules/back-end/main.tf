@@ -59,6 +59,11 @@ resource "aws_launch_configuration" "backend_instances" {
   lifecycle {
     create_before_destroy = true
   }
+
+  tags  = {
+    Name = "${var.environment}-backend-end-instance"
+    Type = "backend"
+  }
 }
 
 resource "aws_autoscaling_group" "asg_backend" {

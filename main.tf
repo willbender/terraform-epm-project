@@ -6,6 +6,7 @@ module "vpc" {
   private_subnets   = var.private_subnets
 }
 
+/*
 module "mysql" {
   source                = "./modules/mysql"
   environment           = var.environment
@@ -19,7 +20,9 @@ module "mysql" {
   mysql_password        = var.mysql_password
   allocated_storage     = var.allocated_storage
 }
+*/
 
+/*
 module "nat" {
   source                      = "./modules/nat"
   environment                 = var.environment
@@ -29,6 +32,7 @@ module "nat" {
   nat_public_subnet_id        = module.vpc.vpc_public_subnet_ids[0]
   nat_keypair                 = var.key_name
 }
+*/
 
 module "bastion_host" {
   source                    = "./modules/bastion-host"
@@ -57,6 +61,7 @@ module "dns" {
   instance_public_ip  = module.front_end.public_ip
 }
 
+/*
 module "back-end" {
   source        = "./modules/back-end"
   environment   = var.environment
@@ -72,3 +77,4 @@ resource "aws_route" "outbound-nat-route" {
   destination_cidr_block = "0.0.0.0/0"
   network_interface_id   = module.nat.nat_network_interface_id
 }
+*/

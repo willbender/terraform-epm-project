@@ -10,6 +10,13 @@ resource "aws_security_group" "sg_front_end" {
     cidr_blocks = ["0.0.0.0/0"]
   }
 
+  ingress {
+    protocol    = "tcp"
+    from_port   = 22
+    to_port     = 22
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
   egress {
     from_port   = 0
     to_port     = 0
@@ -32,5 +39,6 @@ resource "aws_instance" "front_end_instance" {
 
   tags  = {
     Name = "${var.environment}-front-end-instance"
+    Type = "frontend"
   }
 }
