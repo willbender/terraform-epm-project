@@ -102,12 +102,7 @@ resource "aws_instance" "bastion_instance" {
   key_name                      = var.bastion_keypair
   iam_instance_profile          = aws_iam_instance_profile.bastion_profile.name
 
-  user_data = <<EOF
-  #!/bin/bash
-  sudo yum install -y ansible
-  sudo yum install -y python3-pip
-  sudo pip3 install boto3
-  EOF
+  user_data = "${file("${path.module}/install-ansible.sh")}"
 
   tags  = {
     Name = "${var.environment}-bastion-instance"
