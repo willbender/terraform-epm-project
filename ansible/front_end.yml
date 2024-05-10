@@ -3,7 +3,7 @@
    tasks:
 
    - name: Set env variables
-     lineinfile: dest=~/.bashrc line='export BACKEND_URL=internal-qa-backend-elb-1883439773.us-east-1.elb.amazonaws.com:3000' insertafter='EOF' state=present
+     lineinfile: dest=~/.bashrc line='export BACKEND_URL=internal-qa-backend-elb-1659559557.us-east-1.elb.amazonaws.com:3000' insertafter='EOF' state=present
 
    - name: Install dependencies
      become: true

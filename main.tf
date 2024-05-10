@@ -1,3 +1,4 @@
+# Create a VPC with private subnets, public subnets (with internet gateway) and the route tables
 module "vpc" {
   source            = "./modules/vpc"
   cidr              = var.cidr
@@ -6,7 +7,7 @@ module "vpc" {
   private_subnets   = var.private_subnets
 }
 
-
+#Create a mysql database server with a database inside via aws rds
 module "mysql" {
   source                = "./modules/mysql"
   environment           = var.environment
@@ -22,7 +23,7 @@ module "mysql" {
   allocated_storage     = var.allocated_storage
 }
 
-
+#Create a NAT instance to use it instaed a nat gateway
 module "nat" {
   source                      = "./modules/nat"
   environment                 = var.environment
@@ -33,6 +34,7 @@ module "nat" {
   nat_keypair                 = var.key_name
 }
 
+#Create a bastion host in a public subnet
 module "bastion_host" {
   source                    = "./modules/bastion-host"
   environment               = var.environment
@@ -43,6 +45,7 @@ module "bastion_host" {
   bastion_keypair           = var.key_name
 }
 
+#Create a frontend host in a public subnet
 module "front_end" {
   source                      = "./modules/front-end"
   environment                 = var.environment
@@ -53,6 +56,7 @@ module "front_end" {
   front_end_keypair           = var.key_name
 }
 
+#Create dns
 module "dns" {
   source              = "./modules/dns"
   environment         = var.environment
@@ -60,7 +64,7 @@ module "dns" {
   instance_public_ip  = module.front_end.public_ip
 }
 
-
+#Create a load balancer for backend, together with an auto scaling group for the creation of backend instances
 module "back_end" {
   source        = "./modules/back-end"
   environment   = var.environment
@@ -71,8 +75,16 @@ module "back_end" {
   key_name      = var.key_name
 }
 
+#Route to enable the instances on private subnets to reach the internet via nat instance
 resource "aws_route" "outbound-nat-route" {
   route_table_id         = module.vpc.private_rt_id
   destination_cidr_block = "0.0.0.0/0"
   network_interface_id   = module.nat.nat_network_interface_id
+}
+
+#Create cloud watch dashboard for the frontend instance
+module "cloud_watch" {
+  source      = "./modules/cloud-watch"
+  environment = var.environment
+  instance_id = module.front_end.instance_id
 }

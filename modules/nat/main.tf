@@ -1,3 +1,4 @@
+#Create a security group for the nat instance
 resource "aws_security_group" "sg_nat_instance" {
   name          = "${var.environment}-sg-nat-instance"
   description   = "Security Group for NAT instance"
@@ -7,6 +8,7 @@ resource "aws_security_group" "sg_nat_instance" {
   }
 }
 
+#Create a security group for the provate subnet
 resource "aws_security_group" "sg_private_subnet" {
   name          = "${var.environment}-sg-private-subnet"
   description   = "Security Group for private instances"
@@ -16,6 +18,7 @@ resource "aws_security_group" "sg_private_subnet" {
   }
 }
 
+#Create a rule for the inbound traffic from the vpc
 resource "aws_security_group_rule" "vpc_inbound" {
   type              = "ingress"
   from_port         = 0
@@ -25,6 +28,7 @@ resource "aws_security_group_rule" "vpc_inbound" {
   security_group_id = aws_security_group.sg_nat_instance.id 
 }
 
+#Create a rule for the outbound traffic for the nat instance
 resource "aws_security_group_rule" "outbound_nat_instance" {
   type              = "egress"
   from_port         = 0
@@ -34,6 +38,7 @@ resource "aws_security_group_rule" "outbound_nat_instance" {
   security_group_id = aws_security_group.sg_nat_instance.id 
 }
 
+#Create a rule for the inbound traffic for the private subnet
 resource "aws_security_group_rule" "private_subnet_inbound" {
   type              = "ingress"
   from_port         = 0
@@ -43,6 +48,7 @@ resource "aws_security_group_rule" "private_subnet_inbound" {
   security_group_id = aws_security_group.sg_nat_instance.id 
 }
 
+#Create a rule for the outbound traffic for the private subnet
 resource "aws_security_group_rule" "outbound_private_subnet" {
   type              = "egress"
   from_port         = 0
@@ -52,6 +58,7 @@ resource "aws_security_group_rule" "outbound_private_subnet" {
   security_group_id = aws_security_group.sg_private_subnet.id 
 }
 
+#Define the ami to use for the nat instance - This ami is special to create a nat instance
 data "aws_ami" "fck_nat_amzn2" {
   most_recent   = true
   filter {
@@ -64,6 +71,7 @@ data "aws_ami" "fck_nat_amzn2" {
   }
 }
 
+#Create the nat instance in a public subnet with the defined ami
 resource "aws_instance" "nat_instance" {
   ami                           = data.aws_ami.fck_nat_amzn2.id
   instance_type                 = "t2.micro"

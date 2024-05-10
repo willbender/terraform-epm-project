@@ -14,17 +14,18 @@
 12. [X] Create Frontend with terraform.
 13. [X] Create DNS with Route 53.
 14. [X] Create Backend & load balancer with terraform.
-15. [ ] Configure Backend & Frontend with ansible via bastion host.
+15. [X] Configure Backend & Frontend with ansible via bastion host.
 16. [ ] Configure workspaces for terraform
     1.  [ ] qa
     2.  [ ] prod
-17. [ ] Investigate how to monitor the created resources in AWS without a 3 party license.
 
 
 # Additional topics.
 
-- Backend can be created with scaling group, can it be done inside the free tier.
-- NAT GATEWAY cannot be used, use an AMI that allows the private subnets instances to reach the internet.
 - Pipeline can be created using GitHub actions so, a branch for each workspace/environment exists (qa, prod) and whenever a push is done to the branch, the terraform pipeline runs and recreate the infrastructure.
-- See how to configure terraform, so at the end of some infrastructure creation Ansible task /script to call ansible can be called.
-- Structure the terraform code in the best way possible.
+
+# Ultimas tareas
+
+1. Documentar código de terraform, incluido los módulos.
+2. Documentar código de ansible.
+4. Documentar código bash.
