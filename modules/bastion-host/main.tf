@@ -1,3 +1,4 @@
+#Create a security group for the bastio host that can be reached for ssh.
 resource "aws_security_group" "sg_bastion" {
   name          = "${var.environment}-sg-bastion-instance"
   description   = "Security Group for Bastion Host instance"
@@ -22,6 +23,7 @@ resource "aws_security_group" "sg_bastion" {
   }
 }
 
+#Create a role that allows the instance to assume roles
 resource "aws_iam_role" "ec2_instances_rol" {
   name  = "${var.environment}-ec2-instances-rol"
   assume_role_policy = <<EOF
@@ -41,11 +43,13 @@ resource "aws_iam_role" "ec2_instances_rol" {
 EOF
 }
 
+#Needed to attach a role to an instance
 resource "aws_iam_instance_profile" "bastion_profile" {
   name  = "${var.environment}-bastion-profile"
   role  = aws_iam_role.ec2_instances_rol.name
 }
 
+#Policy to allow the bastion host to ask for instances information.
 resource "aws_iam_role_policy" "ec2_full_access" {
   name    = "${var.environment}-ec2_full_access"
   role    = aws_iam_role.ec2_instances_rol.id
@@ -93,6 +97,7 @@ resource "aws_iam_role_policy" "ec2_full_access" {
   })
 }
 
+#Bastion instance that loads an sh script to initialize it. Created in a public subnet.
 resource "aws_instance" "bastion_instance" {
   ami                           = var.ami
   instance_type                 = var.instance_type

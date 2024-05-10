@@ -1,3 +1,4 @@
+#Create a cloudwatch for the given environment and the given instance with metrics for cpu and networkIn
 resource "aws_cloudwatch_dashboard" "demo-dashboard" {
   dashboard_name = "${var.environment}-dashboard-${var.instance_id}"
 
@@ -62,6 +63,7 @@ resource "aws_cloudwatch_dashboard" "demo-dashboard" {
   })
 }
 
+#Create a cloud watch alarm for the cpu use.
 resource "aws_cloudwatch_metric_alarm" "cpu_alarm" {
   alarm_name                = "${var.environment}-cpu-alarm"
   comparison_operator       = "GreaterThanOrEqualToThreshold"

@@ -1,3 +1,4 @@
+#Create a security group for the rds instance
 resource "aws_security_group" "rds_sg" {
   name        = "${var.environment}-rds-sg"
   description = "Allow traffic for MySql database"
@@ -15,6 +16,7 @@ resource "aws_security_group" "rds_sg" {
   }
 }
 
+#Create a subnet group for the rds
 resource "aws_db_subnet_group" "mysql_db_subnet_group" {
   name          = "${var.environment}-mysql-db-subnet-group"
   subnet_ids    = var.subnet_ids
@@ -24,6 +26,7 @@ resource "aws_db_subnet_group" "mysql_db_subnet_group" {
   } 
 }
 
+#Create a db instance with a database ready
 resource "aws_db_instance" "mysql_db" {
   allocated_storage = var.allocated_storage
   storage_type      = var.storage_type

@@ -1,4 +1,10 @@
 #!/bin/bash
+#This script creates the infrastructure via tofu/terraform.
+#When the infra is ready, saves the output important information.
+#Upload the configuration files to the created bastion host.
+#Execute the configuration from the bastion host.
+#Open the browser pointing to frontend to check the result.
+echo "Starting terraform module with key $1"
 #Execute tofu init 
 echo "tf init - **********************************"
 tofu init
@@ -18,13 +24,13 @@ echo "Update elb dns - **********************************"
 sed -i 's/BACKEND_URL=.*.:3000/BACKEND_URL='"${BACKEND_DNS}"':3000/g' ansible/front_end.yml
 #Upload configuration files to bastion host
 echo "upload config files - **********************************"
-scp -r -i "/tmp/william.pem" -o StrictHostKeyChecking=no ansible ec2-user@"${BASTION_IP}":/home/ec2-user/ansible
+scp -r -i "$1" -o StrictHostKeyChecking=no ansible ec2-user@"${BASTION_IP}":/home/ec2-user/ansible
 #Upload key to be able to connect to the instances
 echo "upload key - **********************************"
-scp -i "/tmp/william.pem" -o StrictHostKeyChecking=no /tmp/william.pem ec2-user@"${BASTION_IP}":/home/ec2-user/ansible
+scp -i "$1" -o StrictHostKeyChecking=no $1 ec2-user@"${BASTION_IP}":/home/ec2-user/ansible
 #Execute configuration script on bastion host, to configure database, frontend and backend
 echo "Configuring servers via bastion-host - **********************************"
-ssh -i "/tmp/william.pem" -o StrictHostKeyChecking=no -t  ec2-user@"${BASTION_IP}" 'cd /home/ec2-user/ansible && sh configure-servers.sh'
+ssh -i "$1" -o StrictHostKeyChecking=no -t  ec2-user@"${BASTION_IP}" 'cd /home/ec2-user/ansible && sh configure-servers.sh'
 #Open the browser local with the frontend ip to check if everything was ok
 echo "opening browser - **********************************"
 sensible-browser http://"${FRONTEND_IP}":3030

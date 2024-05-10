@@ -1,3 +1,4 @@
+#Security group for the load balancer that allows connections on ports 3000 (backend code) 22 ssh configuration.
 resource "aws_security_group" "sg_elb" {
   name          = "${var.environment}-sg-elb"
   description   = "Route table for ELB" 
@@ -25,6 +26,7 @@ resource "aws_security_group" "sg_elb" {
   }
 }
 
+#Load balancer with listener on port 3000 (Same as backend instances) and health check on port 22 for the instances. Created on private subnets
 resource "aws_elb" "backend_elb" {
   name                      = "${var.environment}-backend-elb"
   security_groups           = [aws_security_group.sg_elb.id]
@@ -48,6 +50,7 @@ resource "aws_elb" "backend_elb" {
   }
 }
 
+#Launch configuration for the backend instances
 resource "aws_launch_configuration" "backend_instances" {
   name_prefix                   = "${var.environment}-backend-"
   image_id                      = var.ami
@@ -62,6 +65,7 @@ resource "aws_launch_configuration" "backend_instances" {
 
 }
 
+#Autoscaling group for the backend instances with min size 1 and maz size 2
 resource "aws_autoscaling_group" "asg_backend" {
   name                  = "${var.environment}-asg-backend"
   launch_configuration  = aws_launch_configuration.backend_instances.name
@@ -81,6 +85,7 @@ resource "aws_autoscaling_group" "asg_backend" {
     propagate_at_launch = true
   }
 
+  #The backend instances shall be created with tag Type=backend so it can be configured via Ansible dynamic inventories.
   tag {
     key                 = "Type"
     value               = "backend"

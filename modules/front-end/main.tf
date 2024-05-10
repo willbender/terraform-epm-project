@@ -1,3 +1,4 @@
+#Create a security group for the front-end, this requires port 3030 to be opened and ssh to be configured
 resource "aws_security_group" "sg_front_end" {
   name          = "${var.environment}-sg-front-end-instance"
   description   = "Security Group for Front End instance"
@@ -29,6 +30,7 @@ resource "aws_security_group" "sg_front_end" {
   }
 }
 
+#Create the front end instance in a public subnet with a type=frontend so it can be configured via ansible dynamic inventory
 resource "aws_instance" "front_end_instance" {
   ami                           = var.ami
   instance_type                 = var.instance_type
