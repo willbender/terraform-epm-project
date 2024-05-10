@@ -26,13 +26,14 @@ resource "aws_db_subnet_group" "mysql_db_subnet_group" {
 
 resource "aws_db_instance" "mysql_db" {
   allocated_storage = var.allocated_storage
-  storage_type = var.storage_type
-  engine = "mysql"
-  engine_version = var.mysql_version
-  instance_class = var.mysql_instance_class
-  identifier = var.mysql_db_identifier
-  username = var.mysql_username
-  password = var.mysql_password
+  storage_type      = var.storage_type
+  engine            = "mysql"
+  engine_version    = var.mysql_version
+  instance_class    = var.mysql_instance_class
+  identifier        = var.mysql_db_identifier
+  username          = var.mysql_username
+  password          = var.mysql_password
+  db_name           = var.mysql_db_name
 
   vpc_security_group_ids = [aws_security_group.rds_sg.id]
   db_subnet_group_name = aws_db_subnet_group.mysql_db_subnet_group.name

@@ -6,7 +6,7 @@ module "vpc" {
   private_subnets   = var.private_subnets
 }
 
-/*
+
 module "mysql" {
   source                = "./modules/mysql"
   environment           = var.environment
@@ -16,11 +16,12 @@ module "mysql" {
   mysql_version         = var.mysql_version
   mysql_instance_class  = var.mysql_instance_class
   mysql_db_identifier   = var.mysql_db_identifier
+  mysql_db_name         = var.mysql_db_name
   mysql_username        = var.mysql_username
   mysql_password        = var.mysql_password
   allocated_storage     = var.allocated_storage
 }
-*/
+
 
 module "nat" {
   source                      = "./modules/nat"
@@ -60,7 +61,7 @@ module "dns" {
 }
 
 
-module "back-end" {
+module "back_end" {
   source        = "./modules/back-end"
   environment   = var.environment
   vpc_id        = module.vpc.vpc_id

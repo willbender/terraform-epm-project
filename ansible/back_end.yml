@@ -2,6 +2,9 @@
  - hosts: _backend
    tasks:
 
+   - name: Set env variables
+     lineinfile: dest=~/.bashrc line='export DB_HOST=moviedb.ctgq2kaq0uwc.us-east-1.rds.amazonaws.com' insertafter='EOF' state=present
+
    - name: Install dependencies
      become: true
      yum: name={{ item }} state=present
@@ -49,6 +52,6 @@
      command: chdir=/home/ec2-user/app/movie-analyst-api npm install
 
    - name: Run app
-     command: chdir=/home/ec2-user/app/movie-analyst-api node server.js &
+     command: chdir=/home/ec2-user/app/movie-analyst-api node server.js > my_app_log.log 2> my_app_err.log &
      async: 1000
      poll: 0

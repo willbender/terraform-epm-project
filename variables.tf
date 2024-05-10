@@ -48,17 +48,22 @@ variable "mysql_instance_class" {
 
 variable "mysql_db_identifier" {
   description   = "Identifier name of the database"
-  default       = "mydb"
+  default       = "moviedb"
 }
 
 variable "mysql_username" {
   description   = "Username for the database"
-  default       = "dbuser"
+  default       = "applicationuser"
 }
 
 variable "mysql_password" {
   description   = "Password for the database"
-  default       = "dbpassword"
+  default       = "applicationuser"
+}
+
+variable "mysql_db_name" {
+  description   = "Name of the created database"
+  default       = "movie_db"
 }
 
 variable "allocated_storage" {
