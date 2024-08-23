@@ -23,9 +23,3 @@
 # Additional topics.
 
 - Pipeline can be created using GitHub actions so, a branch for each workspace/environment exists (qa, prod) and whenever a push is done to the branch, the terraform pipeline runs and recreate the infrastructure.
-
-# Ultimas tareas
-
-1. Documentar código de terraform, incluido los módulos.
-2. Documentar código de ansible.
-4. Documentar código bash.
